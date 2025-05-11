@@ -60,11 +60,10 @@ class Enemy(GameSprite):
   
     def update(self):
             global s_y, s_x
-            self.rect.y += s_y
             self.rect.x += s_x
 
-s_y = 1
-s_x = 1  
+s_y = 5
+s_x = 5 
 
 win_width = 700
 win_height = 500
@@ -75,6 +74,7 @@ background = transform.scale(image.load(img_back), (win_width, win_height))
 ball = Enemy(img_enemy, 350, 250, 35, 35, 5)
 rocket1 = Player(img_hero, 10, 250, 25, 50, 5)
 rocket2 = Player(img_hero, 625, 250, 25, 50, 5)
+
 
 finish = False
 run = True 
@@ -87,6 +87,8 @@ while run:
             if e.key == K_SPACE:
                 fire_sound.play()
                 ship.fire()
+    if rocket1.rect.colliderect(ball.rect) or rocket2.rect.colliderect(ball.rect):
+        s_x *= -1
  
 
     if not finish:
